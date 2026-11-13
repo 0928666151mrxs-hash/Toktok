@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض التكاتك الملكي | Royal TukTuk Store</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #131b2e;
+            --bg-card: #1a233a;
+            --accent-gold: #f39c12;
+            --accent-gold-light: #f1c40f;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: rgba(243, 156, 18, 0.2);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header & Hero */
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+            border-bottom: 2px solid var(--border-color);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .royal-badge {
+            display: inline-block;
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(243, 156, 18, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #f39c12, #f1c40f, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-top {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn-contact {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-contact:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .btn-contact.wa {
+            background: rgba(37, 211, 102, 0.1);
+            border-color: rgba(37, 211, 102, 0.4);
+            color: #25d366;
+        }
+
+        .btn-contact.call {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: rgba(52, 152, 219, 0.4);
+            color: #3498db;
+        }
+
+        /* Container & Grid */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            border-color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Product Card */
+        .card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(243, 156, 18, 0.15);
+            border-color: rgba(243, 156, 18, 0.5);
+        }
+
+        .card-img-container {
+            position: relative;
+            height: 220px;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .card:hover .card-img-container img {
+            transform: scale(1.05);
+        }
+
+        .badge-cond {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-category {
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            background: var(--bg-secondary);
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .spec-item {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .spec-item i {
+            color: var(--accent-gold);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .price-tag {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--accent-gold-light);
+        }
+
+        .price-tag span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-right: 4px;
+        }
+
+        .btn-buy {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .btn-buy:hover {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .loading, .error-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .controls { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="royal-badge"><i class="fa-solid fa-crown"></i> المعرض الملكي الأول</div>
+        <h1>متجر التكاتك الملكي</h1>
+        <p>أرقى موديلات التكاتك (الركشات) في السوق - الدفع كاش فقط</p>
+        
+        <div class="contact-top">
+            <a href="tel:0128820440" class="btn-contact call">
+                <i class="fa-solid fa-phone"></i> اتصل الآن: 0128820440
+            </a>
+            <a href="https://wa.me/249924381507" target="_blank" class="btn-contact wa">
+                <i class="fa-brands fa-whatsapp"></i> واتساب: 0924381507
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- تصفية وبحث -->
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث عن موديل، ماركة..." onkeyup="filterProducts()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="category-filter" id="categoryFilters">
+                <button class="filter-btn active" onclick="setCategory('الكل')">الكل</button>
+            </div>
+        </div>
+
+        <!-- شبكة المنتجات -->
+        <div class="grid" id="productGrid">
+            <div class="loading">
+                <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+                <p style="margin-top: 1rem;">جاري تحميل أحدث التكاتك من المعرض الملكي...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 <span>معرض التكاتك الملكي</span> | نظام الدفع: كاش فقط</p>
+    </footer>
+
+    <script>
+        // رابط جوجل شيت الخاص بك (صيغة CSV المباشرة)
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/113wPaLoGSNetRRx-9CjFdUWVQuGaupOzW66MECT6mrg/export?format=csv';
+
+        let products = [];
+        let currentCategory = 'الكل';
+
+        // دالة جلب البيانات من جوجل شيت
+        async function fetchTukTuks() {
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                if (!response.ok) throw new Error('فشل الاتصال بملف البيانات');
+                const data = await response.text();
+                
+                parseCSV(data);
+            } catch (error) {
+                console.error('Error fetching sheet:', error);
+                document.getElementById('productGrid').innerHTML = `
+                    <div class="error-state">
+                        <i class="fa-solid fa-triangle-exclamation fa-2x" style="color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                        <p>عذراً، تأكد من أن ملف جوجل شيت منشور على الويب بصيغة CSV أو عام للقراءة.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // تحليل ملف الـ CSV
+        function parseCSV(text) {
+            const lines = text.split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+            
+            products = [];
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                
+                // تحليل مبسط يراعى الفواصل
+                const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(val => val.trim().replace(/^"|"$/g, ''));
+                
+                const product = {
+                    id: row[0] || i,
+                    name: row[1] || row[2] || 'توكتوك فاخر',
+                    category: row[2] || 'أخرى',
+                    price: row[3] && !isNaN(row[3]) ? Number(row[3]).toLocaleString() : (row[3] || 'اتصل لمعرفة السعر'),
+                    image: row[4] || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80',
+                    model_year: row[5] || '2025/2026',
+                    engine: row[6] || 'قياسي',
+                    condition: row[7] || 'جديد'
+                };
+                products.push(product);
+            }
+
+            buildCategoryFilters();
+            renderProducts(products);
+        }
+
+        // بناء أزرار الفلترة حسب الماركات الموجودة
+        function buildCategoryFilters() {
+            const categoriesSet = new Set(products.map(p => p.category));
+            const container = document.getElementById('categoryFilters');
+            
+            let html = `<button class="filter-btn active" onclick="setCategory('الكل')">الكل</button>`;
+            categoriesSet.forEach(cat => {
+                if(cat) {
+                    html += `<button class="filter-btn" onclick="setCategory('${cat}')">${cat}</button>`;
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.innerText === cat) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            filterProducts();
+        }
+
+        // تصفية المنتجات بالبحث والفئة
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = products.filter(p => {
+                const matchesCat = (currentCategory === 'الكل' || p.category === currentCategory);
+                const matchesSearch = p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
+                return matchesCat && matchesSearch;
+            });
+
+            renderProducts(filtered);
+        }
+
+        // عرض المنتجات في الشبكة
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="error-state"><p>لا توجد تكاتك مطابقة لبحثك حالياً.</p></div>`;
+                return;
+            }
+
+            let html = '';
+            items.forEach(p => {
+                const whatsappMsg = encodeURIComponent(`السلام عليكم، أرغب في الاستفسار عن شراء التوكتوك: ${p.name} (${p.category}) السعر: ${p.price}`);
+                
+                html += `
+                    <div class="card">
+                        <div class="card-img-container">
+                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80'">
+                            <div class="badge-cond">${p.condition}</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-category">${p.category}</div>
+                            <h3 class="card-title">${p.name}</h3>
+                            
+                            <div class="specs-grid">
+                                <div class="spec-item"><i class="fa-solid fa-calendar-days"></i> الموديل: ${p.model_year}</div>
+                                <div class="spec-item"><i class="fa-solid fa-gauge-high"></i> المحرك: ${p.engine}</div>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="price-tag"><span>السعر:</span> ${p.price}</div>
+                                <a href="https://wa.me/249924381507?text=${whatsappMsg}" target="_blank" class="btn-buy">
+                                    <i class="fa-brands fa-whatsapp"></i> اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = html;
+        }
+
+        // تشغيل الجلب عند فتح الصفحة
+        window.onload = fetchTukTuks;
+    </script>
+</body>
+</html>
